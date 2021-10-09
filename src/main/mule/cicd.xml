@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8621ad09-65ec-4d2e-a939-7e20d46d3024" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="cicdFlow" doc:id="40cdf593-4fbd-465a-9bd8-aa25912975bc" >
+		<http:listener doc:name="Listener" doc:id="9dd8d0be-6fe0-4f64-8771-7be5f12d7c01" config-ref="HTTP_Listener_config" path="cicd"/>
+		<logger level="INFO" doc:name="Logger" doc:id="3f33280d-8ecc-4e9c-b0ca-b9609ac5a770" message="start flow "/>
+		<ee:transform doc:name="Transform Message" doc:id="ff7b7b11-e592-48db-b648-29a00b955625" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	status : "message sent sucess"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="c3ce58a2-b09f-48fb-ab39-cef672b6ab56" message="end flow"/>
+	</flow>
+</mule>
