@@ -11,6 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<flow name="cicdFlow" doc:id="40cdf593-4fbd-465a-9bd8-aa25912975bc" >
 		<http:listener doc:name="Listener" doc:id="9dd8d0be-6fe0-4f64-8771-7be5f12d7c01" config-ref="HTTP_Listener_config" path="cicd"/>
 		<logger level="INFO" doc:name="Logger" doc:id="3f33280d-8ecc-4e9c-b0ca-b9609ac5a770" message="start flow "/>
+		<set-payload value="ccid payload flow" doc:name="Set Payload" doc:id="cd323f19-7992-44aa-83ef-e57326864d4e" />
 		<ee:transform doc:name="Transform Message" doc:id="ff7b7b11-e592-48db-b648-29a00b955625" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
